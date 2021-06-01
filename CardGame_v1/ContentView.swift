@@ -32,18 +32,7 @@ struct Home: View {
                 .font(.title)
                 .fontWeight(.bold)
             
-            ScrollView {
-                
-                let emojis = cardViewModel.selectedEmojis
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemWidth(emojis)))] ) {
-                    
-                    ForEach(emojis, id: \.self) { emoji in
-                        Card(emoji: emoji)
-                            .aspectRatio(2/3, contentMode: .fit)
-                    }
-                    
-                }
-            }
+            CardsView(cardsViewModel: CardsViewModel(emojis: cardViewModel.selectedEmojis))
             
             Spacer()
             
@@ -58,15 +47,6 @@ struct Home: View {
         }
         .padding(.horizontal)
         
-    }
-    
-    func gridItemWidth(_ emojis: [String]) -> CGFloat {
-        
-        if emojis.count <= 9 {
-            return 120
-        } else {
-            return 70
-        }
     }
 }
 
