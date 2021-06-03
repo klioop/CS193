@@ -16,16 +16,19 @@ struct CardsView: View {
         ScrollView {
             
             let emojis = cardsViewModel.emojis
+            let minimumWidth = cardsViewModel.gridItemWidth(emojis)
             
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: cardsViewModel.gridItemWidth(emojis)))]) {
+            let gridItems = [GridItem(.adaptive(minimum: minimumWidth))]
+            
+            LazyVGrid(columns: gridItems) {
                 
                 ForEach(emojis, id: \.self) { emoji in
                     Card(emoji: emoji)
                         .aspectRatio(2/3, contentMode: .fit)
                 }
-                
             }
         }
+        .padding(.horizontal)
     }
     
 }

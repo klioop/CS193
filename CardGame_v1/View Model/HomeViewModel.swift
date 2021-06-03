@@ -15,26 +15,20 @@ let vehicleEmojis: [String] = ["🚀", "🚁", "🚃", "🚂", "🚄", "🚅", "
 let fruitEmojis = ["🍅", "🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🍎", "🍏", "🍐", "🍑", "🍒", "🍓", "🥑", "🥝", "🥥", "🥭", "🫐"]
 let pictoEmojis = ["🌠", "🎆", "🎇", "🎑", "🏙", "🏞", "🌁", "🗾", "🌃", "🌅", "🌄", "🌇", "🌉", "🌌", "🖼"]
 
-class CardViewModel: ObservableObject {
+class HomeViewModel: ObservableObject {
     
-    @Published var selectedEmojis: [String] = vehicleEmojis
-    @Published var selectedTheme: String = "vehicle"
+    @Published var selectedTheme: Theme = Theme.vehicle
     
-    
-    func selectedEmojis(_ theme: Theme) {
+    var selectedEmojis: [String] {
         
-        switch theme {
-        
+        switch selectedTheme {
         case .vehicle:
-            selectedTheme = "vehicle"
-            let temp = vehicleEmojis.shuffled().prefix(upTo: Int.random(in: 4...vehicleEmojis.count))
-            selectedEmojis = Array(temp)
+            let temp = vehicleEmojis.shuffled()[0..<Int.random(in: 5...vehicleEmojis.count)]
+            return Array(temp)
         case .fruit:
-            selectedTheme = "fruit"
-            selectedEmojis = fruitEmojis.shuffled()
+            return fruitEmojis.shuffled()
         case .picto:
-            selectedTheme = "picto"
-            selectedEmojis = pictoEmojis.shuffled()
+            return pictoEmojis.shuffled()
         }
     }
     
