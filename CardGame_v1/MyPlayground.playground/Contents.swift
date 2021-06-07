@@ -1,8 +1,27 @@
 import SwiftUI
 
-var greeting = "Hello, playground"
-var greeting2 = "Hello, playground"
+enum TeslaModel: CaseIterable { // enum 이 CaseIterable 프로토콜을 따르면 static var 인 allCase 를 사용할 수 있다.
+    case X
+    case S
+    case Three
+    case Y
+}
 
-var arr = [1, 2, 3, 4, 5, 6]
+for model in TeslaModel.allCases {
+    print(reportSalesNumbers(for: model))
+}
 
-let arr2 = arr[0...3]
+func reportSalesNumbers(for model: TeslaModel) -> Int {
+    
+    switch model {
+    
+    case .S:
+        return 1
+    case .X:
+        return 2
+    case .Three:
+        return 3
+    case .Y: return 4
+        
+    }
+}
