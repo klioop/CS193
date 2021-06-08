@@ -25,3 +25,30 @@ func reportSalesNumbers(for model: TeslaModel) -> Int {
         
     }
 }
+
+struct ChessBoard {
+    let boardColors: [Bool] = {
+        var tempBoards = Array<Bool>()
+        var isBlack = false
+        
+        for _ in 1...8 {
+            for _ in 1...8 {
+                tempBoards.append(isBlack)
+                isBlack = !isBlack
+            }
+            isBlack = !isBlack
+        }
+        
+        return tempBoards
+    }()
+    
+    func squareIsBlackAt(row: Int, column: Int) -> Bool {
+        /// row: The range of row is 0...7
+        /// column: The range of column is 0...7
+        
+        return boardColors[(row * 8) + column]
+    }
+}
+
+let c1 = ChessBoard()
+c1.squareIsBlackAt(row: 7, column: 6)
