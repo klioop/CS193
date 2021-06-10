@@ -7,9 +7,9 @@ enum TeslaModel: CaseIterable { // enum 이 CaseIterable 프로토콜을 따르�
     case Y
 }
 
-for model in TeslaModel.allCases {
-    print(reportSalesNumbers(for: model))
-}
+//for model in TeslaModel.allCases {
+//    print(reportSalesNumbers(for: model))
+//}
 
 func reportSalesNumbers(for model: TeslaModel) -> Int {
     
@@ -51,4 +51,5 @@ struct ChessBoard {
 }
 
 let c1 = ChessBoard()
-c1.squareIsBlackAt(row: 7, column: 6)
+//c1.squareIsBlackAt(row: 7, column: 6)
+

@@ -9,14 +9,12 @@ import Foundation
 
 struct ThemeModel {
     
-    var name: String
-    var numberOfPairsOfCards: Int
+    let numberOfPairsOfCards: Int
     var colorOfCards: String?
-    var emojis: [String]
+    private(set) var emojis: [String]
     
     init (name: String, numberOfPairsOfCards: Int, colorOfCards: String? = nil) {
         
-        self.name = name
         self.numberOfPairsOfCards = numberOfPairsOfCards
         self.colorOfCards = colorOfCards ?? "red"
         

@@ -21,8 +21,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         
         if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }), // if let 이 나오면 , 는 && 과 같아짐
            !cards[chosenIndex].isFaceup,
-           !cards[chosenIndex].isMatched
-        {
+           !cards[chosenIndex].isMatched {
             
             if let potentialMatchedIndex = indexOfOneAndTheOnlyOne {
                 
@@ -45,7 +44,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
-    func index(of card: Card) -> Int? { // Array.fistIndex 가 이 함수를 대신함. Array Interface 를 자세히 공부할 필요가 있음
+    // Array.fistIndex 가 이 함수를 대신함. Array Interface 를 자세히 공부할 필요가 있음
+    func index(of card: Card) -> Int? {
         for index in cards.indices { // cards.indices 는 0..<cards.count 와 같다.
             if cards[index].id == card.id {
                 return index
@@ -60,14 +60,22 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         
         for pairIdx in 0..<numberOfParisOfCards {
             let content = createCardContent(pairIdx)
-            cards.append(Card(content: content, id: pairIdx * 2))
-            cards.append(Card(content: content, id: pairIdx * 2 + 1))
+            let card = Card(content: content, id: pairIdx * 2)
+            
+            if !cards.contains(where: { $0.content == card.content }) {
+                cards.append(card)
+                cards.append(Card(content: content, id: pairIdx * 2 + 1))
+            }
+//            cards.append(Card(content: content, id: pairIdx * 2))
+//            cards.append(Card(content: content, id: pairIdx * 2 + 1))
         }
+        
+        cards.shuffle() // .shuffle() 은 기존 배열에서 섞고 .shuffled() 은 새로운 배열을 만들어서 섞음
     }
     
     struct Card: Identifiable {
         
-        var isFaceup: Bool = true
+        var isFaceup: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         var id: Int

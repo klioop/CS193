@@ -33,12 +33,7 @@ struct HomeLecture: View {
             .padding(.horizontal)
             
             Spacer()
-            
-            
         }
-        
-        
-        
     }
 }
 
