@@ -12,6 +12,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     
     var indexOfOneAndTheOnlyOne: Int?
+    var score = 0
     
     mutating func choose(_ card: Card) {
         
@@ -28,7 +29,19 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[potentialMatchedIndex].content == cards[chosenIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchedIndex].isMatched = true
+                    self.score += 2
+                } else {
+                    cards[chosenIndex].count += 1
+                    cards[potentialMatchedIndex].count += 1
+                    
+                    if cards[chosenIndex].count >= 2 {
+                        self.score -= 1
+                    }
+                    if cards[potentialMatchedIndex].count >= 2 {
+                        self.score -= 1
+                    }
                 }
+                
                 indexOfOneAndTheOnlyOne = nil
                 
             } else {
@@ -75,9 +88,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     struct Card: Identifiable {
         
+        var count = 0
         var isFaceup: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
+        
+        
     }
 }

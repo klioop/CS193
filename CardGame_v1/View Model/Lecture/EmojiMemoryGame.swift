@@ -37,6 +37,10 @@ class EmojiMemoryGame: ObservableObject {
         model.cards
     }
     
+    var score: Int {
+        model.score
+    }
+    
     init() {
         let themes = ["vehicle", "fruit", "picto"]
         self.models = themes.map { EmojiMemoryGame.createMemoryGame(theme: EmojiMemoryGame.themeOfGame(name: $0, numberOfEmoji: 100)) }

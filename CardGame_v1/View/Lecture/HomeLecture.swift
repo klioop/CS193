@@ -15,9 +15,20 @@ struct HomeLecture: View {
         
         VStack {
             
-            Text("Memorize!")
-                .font(.title)
-                .fontWeight(.bold)
+            HStack {
+                
+                Text(String(viewModel.score))
+                    .padding(.leading)
+                    .font(.headline)
+                
+                Spacer()
+                
+                Text("Memorize!")
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                Spacer()
+            }
             
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(viewModel.cards) { card in
