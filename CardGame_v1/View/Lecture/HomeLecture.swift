@@ -15,20 +15,7 @@ struct HomeLecture: View {
         
         VStack {
             
-            HStack {
-                
-                Text(String(viewModel.score))
-                    .padding(.leading)
-                    .font(.headline)
-                
-                Spacer()
-                
-                Text("Memorize!")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
-                Spacer()
-            }
+            headerView
             
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(viewModel.cards) { card in
@@ -44,6 +31,32 @@ struct HomeLecture: View {
             .padding(.horizontal)
             
             Spacer()
+        }
+    }
+    
+    var headerView: some View {
+        HStack {
+            
+            Text("score: \(viewModel.score)")
+                .padding(.leading)
+                .font(.headline)
+            
+            Spacer()
+            
+            Text("Memorize!")
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Spacer()
+            
+            Button(action:{
+                viewModel.newGame()
+            }) {
+                Label("", systemImage: "plus.circle.fill")
+                    .foregroundColor(.green)
+                    .font(.system(size: 20))
+            }
+            .padding(.trailing)
         }
     }
 }

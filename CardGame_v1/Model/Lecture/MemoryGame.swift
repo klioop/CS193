@@ -30,6 +30,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchedIndex].isMatched = true
                     self.score += 2
+                    
                 } else {
                     cards[chosenIndex].count += 1
                     cards[potentialMatchedIndex].count += 1
