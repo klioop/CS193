@@ -10,29 +10,42 @@ import SwiftUI
 struct CardLecture: View {
     
     var card: MemoryGame<String>.Card
-    let shape = RoundedRectangle(cornerRadius: 20)
+    let shape = RoundedRectangle(cornerRadius: LayoutConstants.cornerRadious)
     
     var body: some View {
         
-        ZStack{
-            
-            if card.isFaceup {
-                shape
-                    .fill().foregroundColor(.white)
-                shape
-                    .strokeBorder(lineWidth: 3)
-                Text(card.content)
-                    .font(.largeTitle)
-            } else if card.isMatched {
-                shape.opacity(0)
+        GeometryReader { proxy in
+        
+            ZStack {
+                
+                if card.isFaceup {
+                    shape
+                        .fill().foregroundColor(.white)
+                    shape
+                        .strokeBorder(lineWidth: LayoutConstants.lineWidth)
+                    Text(card.content)
+                        .font(font(in: proxy.size))
+                } else if card.isMatched {
+                    shape.opacity(0)
+                }
+                else {
+                    shape
+                        .fill()
+                }
             }
-            else {
-                shape
-                    .fill()
-            }
-            
         }
     }
+    
+    private func font(in size: CGSize) -> Font {
+        Font.system(size: min(size.width, size.height) * LayoutConstants.fontScale)
+    }
+    
+    private struct LayoutConstants {
+        static let cornerRadious: CGFloat = 20
+        static let lineWidth: CGFloat = 3
+        static let fontScale: CGFloat = 0.8
+    }
+    
 }
 
 struct CardLecture_Previews: PreviewProvider {
